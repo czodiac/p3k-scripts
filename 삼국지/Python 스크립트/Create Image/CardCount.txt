@@ -1,0 +1,6 @@
+Platinum: 37
+Gold: 27
+Silver: 716
+Bronze: 141
+============================
+Total: 921

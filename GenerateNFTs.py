@@ -15,6 +15,10 @@ srcFile = "HeroData.xlsx"
 srcWB = load(filename=srcFile)
 srcWBSheet = srcWB['Sheet1']
 
+# Tire 금카드 최소 능력시
+goldMinStat = 77
+silverMinStat = 59
+
 # Tier 컬러
 goldCardColor = (118, 95, 39)
 bronzeCardColor = (66, 34, 4)
@@ -35,7 +39,7 @@ statFont = ImageFont.truetype('./Fonts/AreaKilometer50-ow3xB.ttf', 90)
 chiFont = ImageFont.truetype('./Fonts/wangfonts/wt014.ttf', 155)
 korFont = ImageFont.truetype('./Fonts/JejuHallasan.ttf', 70)
 # PastiRegular-mLXnm.otf PlatNomor-WyVnn.ttf
-barFont = ImageFont.truetype('./Fonts/Pancer-3zrXX.ttf', 70)
+barFont = ImageFont.truetype('./Fonts/PublicPixel-0W6DP.ttf', 45)
 
 def addStatBar(yPos, val):
     yPos = int(yPos)
@@ -44,8 +48,8 @@ def addStatBar(yPos, val):
     draw.text((340, yPos), val, nameColor, font=statFont)
 
     # Add dark stat bar
-    spacePixel = 9
-    barYPosFix = 3
+    spacePixel = 8
+    barYPosFix = 10
     startXPos = 480
     for i in range(int(val)):
         updatedXPos = startXPos+(i*spacePixel)
@@ -87,12 +91,12 @@ for i, row in enumerate(srcWBSheet.iter_rows()):
             nameColor = platinumCardColor
             brightBarColor = platinumCardBarColor
             platinumCnt=platinumCnt+1
-        elif int(war) > 89 or int(brain) > 89 or int(charm) > 89:
+        elif int(war) > goldMinStat or int(brain) > goldMinStat or int(charm) > goldMinStat:
             bgImg = './frame_3stats_gold.png'
             nameColor = goldCardColor
             brightBarColor = goldCardBarColor
             goldCnt = goldCnt+1
-        elif int(war) > 59 or int(brain) > 59 or int(charm) > 59:
+        elif int(war) > silverMinStat or int(brain) > silverMinStat or int(charm) > silverMinStat:
             bgImg = './frame_3stats_silver.png'
             nameColor = silverCardColor
             brightBarColor = silverCardBarColor
@@ -137,8 +141,6 @@ for i, row in enumerate(srcWBSheet.iter_rows()):
         draw.text((korXPos, 1690), korName, nameColor, font=korFont)
         
         # 능력치
-        statXPos = 340
-        
         addStatBar(540, war)
         addStatBar(720, brain)
         addStatBar(900, charm)
